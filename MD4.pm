@@ -5,10 +5,12 @@ use Exporter;
 use warnings;
 use vars qw($VERSION @ISA @EXPORTER @EXPORT_OK);
 
+use integer;
+
 @EXPORT_OK = qw(md4 md4_hex md4_base64);
 
 @ISA = 'Exporter';
-$VERSION = '1.3';
+$VERSION = '1.4';
 
 # Module logic and interface adapted from Digest::Perl::MD5 v1.5 from CPAN.
 # See author information below.
@@ -102,8 +104,9 @@ sub L # left-rotate
 
 sub M # mod 2**32
 {
+    no integer;
     my ($x) = @_;
-    my $m = 1+~0;
+    my $m = 1+0xffffffff;
     $x-$m*int$x/$m;
 }
 
@@ -115,7 +118,7 @@ sub R # reverse two bit number
 
 sub md4(@)
 {
-    my @input = grep defined && length>0, split /(.{64})/, join '', @_;
+    my @input = grep defined && length>0, split /(.{64})/s, join '', @_;
     push @input, '' if !@input || length($input[$#input]) >= 56;
     my @A = (0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476); # initial regs
     my @L = qw(3 7 11 19 3 5 9 13 3 9 11 15); # left rotate counts
@@ -324,7 +327,7 @@ C<Digest::Perl::MD5> was made by Christian Lackas <delta@clackas.de>.
 
 MD5 in 8 lines of perl5 implemented and optimized for size by John Allen[3] and
 collected by Adam Back[5] <adam@cypherspace.org>.  Conversion to MD4 algorithm
-by Ted Anderson <ota@transarc.com>.
+by Ted Anderson <tedanderson@mindspring.com>.
 
 =head1 Footnotes
 

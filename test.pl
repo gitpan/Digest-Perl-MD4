@@ -64,5 +64,10 @@ sub Unicode {
 }
 Check(Unicode("foo") => "ac8e657f83df82beea5d43bdaf7800cc");
 
+# regression test for CPAN Ticket 4961
+# https://rt.cpan.org/Ticket/Display.html?id=4961
+
+Check("1"x40 . "\n" . "2"x40 => "4500d7037b220939ed44938a6a3ce40b");
+
 warn "MD4 Test Failed with $errors errors.\n" if $errors;
 print "MD4 Test Succeeded\n" unless $errors;
