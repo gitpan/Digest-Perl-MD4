@@ -1,0 +1,14 @@
+Revision history for Perl extension Digest::Perl::MD4.
+
+1.02  14-Aug-2002 7:12
+	- Include Makefile.PL in tar file
+	- Report last_test_to_print in test.pl
+	- Eliminated ^Ms
+
+1.01  9-Aug-2002 12:47
+	- Convert test code to use CPAN testing scaffolding.
+	- Added Makefile.PL
+
+1.00  4-Jan-2002 15:49
+	- original version, modulized with OO interface
+

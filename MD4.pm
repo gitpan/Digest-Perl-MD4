@@ -8,7 +8,7 @@ use vars qw($VERSION @ISA @EXPORTER @EXPORT_OK);
 @EXPORT_OK = qw(md4 md4_hex md4_base64);
 
 @ISA = 'Exporter';
-$VERSION = '1.1';
+$VERSION = '1.2';
 
 # Module logic and interface adapted from Digest::Perl::MD5 v1.5 from CPAN.
 # See author information below.
