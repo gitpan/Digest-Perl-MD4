@@ -8,7 +8,7 @@ use vars qw($VERSION @ISA @EXPORTER @EXPORT_OK);
 @EXPORT_OK = qw(md4 md4_hex md4_base64);
 
 @ISA = 'Exporter';
-$VERSION = '1.2';
+$VERSION = '1.3';
 
 # Module logic and interface adapted from Digest::Perl::MD5 v1.5 from CPAN.
 # See author information below.
@@ -134,7 +134,7 @@ sub md4(@)
 	my $r=length($_);
 	$l+=$r;
 	$r++,$_.="\x80" if $r<64&&!$p++;
-	my @W=unpack V16,$_."\0"x7;
+	my @W=unpack 'V16',$_."\0"x7;
 	push @W, (0)x16 if @W<16;
 	$W[14]=$l*8 if $r<57;		# add bit-length in low 32-bits
 	($a,$b,$c,$d) = @A;
@@ -153,7 +153,7 @@ sub md4(@)
 	    $A[$_] = M($A[$_]+$v[$_]);
 	}
     }
-    pack V4, @A;
+    pack 'V4', @A;
 }
 
 sub md4_hex(@) {
