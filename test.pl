@@ -1,8 +1,25 @@
-use Digest::Perl::MD4 qw(md4 md4_hex);
+# Before `make install' is performed this script should be runnable with
+# `make test'. After `make install' it should work as `perl test.pl'
 
+######################### We start with some black magic to print on failure.
+
+# Change 1..1 below to 1..last_test_to_print .
+# (It may become useful if the test is moved to ./t subdirectory.)
+
+BEGIN { $| = 1; print "1..1\n"; }
+END {print "not ok 1\n" unless $loaded;}
+use Digest::Perl::MD4 qw(md4 md4_hex);;
+$loaded = 1;
+print "ok 1\n";
+
+######################### End of black magic.
+
+# Insert your test code below (better if it prints "ok 13"
+# (correspondingly "not ok 13") depending on the success of chunk 13
+# of the test code):
+
+my $testNum = 1;
 my $errors = 0;
-
-$| = 1;
 
 sub Printable {
     my $a = shift;
@@ -14,9 +31,15 @@ sub Printable {
 
 sub Check {
     my ($data, $result) = @_;
+    $testNum++;
     my $hash = md4_hex($data);
     print 'MD4 ("', Printable($data), "\") = $hash\n";
-    $errors++, warn "Expected $result instead\n" if $hash ne $result;
+    if ($hash ne $result) {
+	$errors++;
+	warn "Expected $result instead\n";
+	print "not ";
+    }
+    print "ok $testNum\n";
 }
 
 Check("", '31d6cfe0d16ae931b73c59d7e0c089c0');
@@ -41,5 +64,5 @@ sub Unicode {
 }
 Check(Unicode("foo") => "ac8e657f83df82beea5d43bdaf7800cc");
 
-die "MD4 Test Failed with $errors errors.\n" if $errors;
-print "MD4 Test Succeeded\n";
+warn "MD4 Test Failed with $errors errors.\n" if $errors;
+print "MD4 Test Succeeded\n" unless $errors;

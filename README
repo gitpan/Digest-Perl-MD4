@@ -33,7 +33,7 @@ MANIFEST
 README		This file.
 MD4.pm		The Perl code implementing Rivest's MD4 algorithm.
 Digest-MD4.pm	A wrapper module called Digest::MD4.
-md4_test.pl	A test program for the MD4 module.
+test.pl		A test program for the MD4 module.
 
 The MD4 module's interface should be compatible with the C-code MD4
 module written by Mike McCauley <mikem@open.com.au>.  The Digest-MD4.pm
